@@ -23,7 +23,8 @@ function Game() {
   const [words, setWords] = useState("");
   const [story, setStory] = useState([]);
   const [index, setIndex] = useState(0);
-  const [soulRead, setSoulRead] = useState("No soul read yet...");
+  const [soulReadShort, setSoulReadShort] = useState("No soul read yet...");
+  const [soulReadLong, setSoulReadLong] = useState("No soul read yet...");
 
   useEffect(() => {
     const initText = "Hello there! I'm Bubby the bear! Tap me to get started.";
@@ -83,8 +84,10 @@ function Game() {
       },
       body: JSON.stringify({ image_str: base64 }),
     });
-    const { newStory, newSoulRead } = await response.json();
-    setSoulRead(newSoulRead);
+    const { newStory, newSoulReadShort, newSoulReadLong } =
+      await response.json();
+    setSoulReadShort(newSoulReadShort);
+    setSoulReadLong(newSoulReadLong);
     console.log("API response:", newStory);
     setStory(newStory);
     setWords(newStory[0]["story"]);
@@ -172,12 +175,21 @@ function Game() {
           </video>
           <div className="flex flex-col items-center">
             <AnimatedSpeechBubble text={words} />
+            <div className="p-4" />
+            <TodoList
+              items={story.slice(0, 3).map((event) => event["task"])}
+              index={index}
+            />
           </div>
         </div>
         <div className="w-1/2">
-          <TodoList
-            items={story.slice(0, 3).map((event) => event["task"])}
-            index={index}
+          <video
+            ref={videoRef}
+            autoPlay
+            playsInline
+            className={
+              (dbg ? "w-128" : "hidden") + " rounded-lg overflow-hidden"
+            }
           />
           <Accordion type="single" collapsible className="w-full">
             <AccordionItem value="item-1">
@@ -185,18 +197,23 @@ function Game() {
                 🔮 Soul Read
               </AccordionTrigger>
               <AccordionContent className="flex flex-col gap-4 text-balance text-lg">
-                <ReactMarkdown>{soulRead}</ReactMarkdown>
+                <ReactMarkdown>{soulReadShort}</ReactMarkdown>
+                <Accordion type="single" collapsible className="w-full">
+                  <AccordionItem value="item-1">
+                    <AccordionTrigger className="text-lg">
+                      More Details
+                    </AccordionTrigger>
+                    <AccordionContent className="flex flex-col gap-4 text-balance text-lg">
+                      <ReactMarkdown>{soulReadLong}</ReactMarkdown>
+                    </AccordionContent>
+                  </AccordionItem>
+                </Accordion>
               </AccordionContent>
             </AccordionItem>
           </Accordion>
         </div>
       </div>
-      <video
-        ref={videoRef}
-        autoPlay
-        playsInline
-        className={dbg ? "w-128 p-8" : "hidden"}
-      />
+
       <canvas ref={canvasRef} className={dbg ? "hidden" : "hidden"} />
       <FloatingHomeButton />
       {/* <audio autoPlay loop>

@@ -34,7 +34,7 @@ def start_game(payload: Payload):
         raise HTTPException(status_code=498, detail="BLOCKED!")
     game.start_game(payload.image_str)
     lock.release()
-    return {"newStory": game.story, "newSoulRead": game.soul_read}
+    return {"newStory": game.story, "newSoulReadShort": game.soul_read_short, "newSoulReadLong": game.soul_read_long}
 
 @app.post("/game_loop")
 def game_loop(payload: Payload):

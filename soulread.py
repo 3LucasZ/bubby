@@ -3,7 +3,7 @@ import json
 import os
 from dotenv import load_dotenv
 
-from utils import run_vision_inference
+from utils import run_text_inference, run_vision_inference
 load_dotenv()
 
 import cv2
@@ -121,7 +121,7 @@ The final format should feel uncannily insightful, with just enough technical la
 
 It should be positive and optimistic. DO NOT INCLUDE OR ASSUME PEOPLE'S NAMES.
 
-Format it like this:
+Format it exactly like this, without adding unnecessary information for the end user:
 
 🧠 Mood Signal:
 
@@ -147,8 +147,9 @@ Now apply that transformation to the following original input:
 
 '''
 
-    output = run_vision_inference(image_str, story_prompt_1 + story_prompt_2)
-    return output
+    output_1 = run_vision_inference(image_str, story_prompt_1)
+    output_2 = run_text_inference(story_prompt_2+" "+output_1)
+    return output_1, output_2
 
 def frame_to_base64(frame):
     # Encode frame as JPEG
