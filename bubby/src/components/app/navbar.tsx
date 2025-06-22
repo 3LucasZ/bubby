@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import icon from "@/assets/icon.png"; // Vite alias (@/ = src)
+import React from "react";
 
 const Navbar01Page = () => {
   return (
@@ -9,10 +10,14 @@ const Navbar01Page = () => {
           <img src={icon} alt="App Icon" className="max-w-12 max-h-12" />
 
           <div className="flex items-center gap-3">
-            <Button variant="outline" className="hidden sm:inline-flex">
-              Sign In
-            </Button>
-            <Button>Get Started</Button>
+            <a href="https://devpost.com/software/bubbybear">
+              <Button variant="outline" className="hidden sm:inline-flex">
+                About
+              </Button>
+            </a>
+            <a href="/game">
+              <Button>Get Started</Button>
+            </a>
           </div>
         </div>
       </nav>

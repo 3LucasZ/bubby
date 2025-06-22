@@ -3,6 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { ArrowUpRight, CirclePlay } from "lucide-react";
+import React from "react";
 
 const Hero07 = () => {
   return (
@@ -30,13 +31,15 @@ const Hero07 = () => {
             {/* <Button size="lg" className="rounded-full text-base">
               Get Started <ArrowUpRight className="!h-5 !w-5" />
             </Button> */}
-            <Button
-              variant="outline"
-              size="lg"
-              className="rounded-full text-base shadow-none"
-            >
-              <CirclePlay className="!h-5 !w-5" /> Watch Demo
-            </Button>
+            <a href="https://www.youtube.com/watch?v=1CnfRK3ScTI">
+              <Button
+                variant="outline"
+                size="lg"
+                className="rounded-full text-base shadow-none flex"
+              >
+                <CirclePlay className="!h-5 !w-5" /> Watch Demo
+              </Button>
+            </a>
           </>
           <>
             {/* <Button>
