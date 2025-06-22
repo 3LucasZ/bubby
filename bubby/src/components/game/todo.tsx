@@ -1,20 +1,7 @@
-/**
- * v0 by Vercel.
- * @see https://v0.dev/t/vKuYHiDCCTZ
- * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
- */
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardContent,
-  CardFooter,
-} from "@/components/ui/card";
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import React from "react";
+import "./swing.css"; // <- Add this import for the custom animation
 
 export default function TodoList({
   items,
@@ -24,15 +11,14 @@ export default function TodoList({
   index: number;
 }) {
   return (
-    <Card className="w-full max-w-lg mx-auto">
+    <Card className="w-full max-w-lg mx-auto animate-swing origin-top [animation-duration:3s] [animation-iteration-count:infinite] [animation-timing-function:ease-in-out]">
       <CardHeader>
-        <CardTitle className="text-2xl">Bubby's List</CardTitle>
+        <CardTitle className="text-2xl text-center">Bubby's List</CardTitle>
       </CardHeader>
       <CardContent className="flex flex-col gap-4">
         {items.length > 0 ? (
           items.map((item, i) => {
-            if (i > index) return null; // Hide item
-
+            if (i > index) return null;
             return (
               <div key={i} className="flex items-center gap-4">
                 <Checkbox checked={i < index} />
@@ -42,32 +28,11 @@ export default function TodoList({
           })
         ) : (
           <div className="flex items-center gap-4">
-            <Checkbox className="" />
-            <label>{"Adventure awaits! Click Bubby."}</label>
+            <Checkbox />
+            <label>Adventure awaits! Click Bubby.</label>
           </div>
         )}
       </CardContent>
     </Card>
-  );
-}
-
-function TrashIcon(props) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M3 6h18" />
-      <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
-      <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
-    </svg>
   );
 }

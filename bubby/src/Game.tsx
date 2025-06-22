@@ -160,20 +160,24 @@ function Game() {
 
   const dbg = true;
   return (
-    <div className="p-4">
+    <div className="px-2">
+      <h1 className="text-4xl font-bold text-center text-amber-900 py-4">
+        Bubby the Bear 🐾
+      </h1>
       <div className="flex flex-row gap-4">
         <div className="w-1/2">
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="w-full"
-            onClick={startGame}
-          >
-            <source src={video} type="video/mp4" />
-          </video>
           <div className="flex flex-col items-center">
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="w-3/4"
+              onClick={startGame}
+            >
+              <source src={video} type="video/mp4" />
+            </video>
+
             <AnimatedSpeechBubble text={words} />
             <div className="p-4" />
             <TodoList
@@ -188,7 +192,7 @@ function Game() {
             autoPlay
             playsInline
             className={
-              (dbg ? "w-128" : "hidden") + " rounded-lg overflow-hidden"
+              (dbg ? "w-3/4" : "hidden") + " rounded-lg overflow-hidden"
             }
           />
           <Accordion type="single" collapsible className="w-full">
